@@ -30,6 +30,7 @@
 
 ... the idea is that you can clean-up muddled parts of a codebase, by making data-changes explicit.
 
+it is pretty simple, and sort of beautiful.
 <img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 Does the world need another json-patch implementation? no.
@@ -70,13 +71,13 @@ and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have som
 
 1. **get()** is more-forgiving<br/>
    if you give it a path '/foo/typo/9/wrong' that doesn't exist,<br/>
-   it will just say _haha! no problem! **undefined**! ✌_
+   it will just say - '_haha! no problem! **undefined**! ✌_'
 
 2. **apply()** changes in-place (mutable)<br/>
-   -and before you think 'hey this guy has never seen that Rich Hickey talk' - I have.<br/>
-   I just think calling .clone() over and over is not my style.<br/>
+   -and before you think _'hey this guy has never seen that Rich Hickey talk'_ - I have seen that one.<br/>
+   most javascript implementations call **.clone()** over and over.<br/>
 
-3. **sneaky-append** an 'add' patch on an array doesn't need an index, and assumes a push, when appropriate
+3. **- sneaky-append -** an **'add'** patch on an array doesn't need an index, and assumes a push on an array:
 
 ```js
 let json = { foo: [1] }
@@ -86,7 +87,7 @@ json = apply(patch, json) //normally this would be an arror
 // {foo: [1, 2]}
 ```
 
-4. **sneaky-splat** an 'add' patch on an object doesn't need an key, if the value is also an object
+4. **- sneaky-splat -** an 'add' patch on an object doesn't need an key, if the value is also an object:
 
 ```js
 let json = { foo: { bar: true } }
