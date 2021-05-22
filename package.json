@@ -1,0 +1,49 @@
+{
+  "name": "simple-json-patch",
+  "description": "",
+  "version": "0.0.1",
+  "type": "commonjs",
+  "sideEffects": false,
+  "main": "./builds/simple-json-patch.js",
+  "unpkg": "./builds/simple-json-patch.min.js",
+  "module": "./builds/simple-json-patch.mjs",
+  "exports": {
+    ".": {
+      "require": "./builds/simple-json-patch.js",
+      "import": "./builds/simple-json-patch.mjs",
+      "default": "./builds/simple-json-patch.js"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c --silent",
+    "watch": "amble ./scratch.js",
+    "test": "node \"./tests/**.test.js\" | tap-dancer"
+  },
+  "author": "Spencer Kelly <spencermountain@gmail.com>",
+  "homepage": "https://github.com/spencermountain/simple-json-patch",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/spencermountain/simple-json-patch.git"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120,
+    "arrowParens": "avoid"
+  },
+  "devDependencies": {
+    "tap-dancer": "0.3.1",
+    "tape": "5.2.2"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ],
+  "eslintIgnore": [
+    "builds/*.js"
+  ],
+  "license": "MIT"
+}
