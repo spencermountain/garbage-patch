@@ -26,9 +26,9 @@
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
-[json patch](http://jsonpatch.com/) is an old and neat idea for describing changes to JSON.
+**[json patch](http://jsonpatch.com/)** is a neat idea for describing changes to JSON.
 
-... the idea is that you can clean-up muddled parts of a codebase, by making your changes explicit.
+... the idea is that you can clean-up muddled parts of a codebase, by making data-changes explicit.
 
 <img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
@@ -58,21 +58,24 @@ apply(patch, json)
 }*/
 ```
 
-there is nothing clever going on here.
+there is nothing too-clever going on
 
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 ---
 
-these methods _takes inspiration_ from the [pointer spec](https://datatracker.ietf.org/doc/html/rfc6901)
+these methods _take inspiration_ from the [pointer spec](https://datatracker.ietf.org/doc/html/rfc6901)
 and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have some differences:
 
-1. **get()** is more-forgiving
-   if you give it a path '/foo/typo/9/wrong' it will just say `undefined`!
-2. **apply()** changes in-place (mutable)
-   -and before you think 'hey this guy has never seen that Rich Hickey talk' - I have.
-   I just think calling .clone() over and over is not my style.
+1. **get()** is more-forgiving<br/>
+   if you give it a path '/foo/typo/9/wrong' that doesn't exist,<br/>
+   it will just say _haha! no problem! **undefined**! ✌_
+
+2. **apply()** changes in-place (mutable)<br/>
+   -and before you think 'hey this guy has never seen that Rich Hickey talk' - I have.<br/>
+   I just think calling .clone() over and over is not my style.<br/>
+
 3. **sneaky-append** an 'add' patch on an array doesn't need an index, and assumes a push, when appropriate
 
 ```js
@@ -96,9 +99,9 @@ apply(patch, json) //this would normally be an error, i think.
 
 ### API
 
-- **make** - create a JSON pointer from a list of properties
-- **get** - use a pointer to get data out of JSON
-- **apply** - make modifications to a JSON object (in place)
+- **make(props)** - create a JSON pointer from a list of properties
+- **get(pntr,json)** - use a pointer to get data out of JSON
+- **apply(patch, json)** - make modifications to a JSON object (in place)
 
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
@@ -108,5 +111,7 @@ apply(patch, json) //this would normally be an error, i think.
 - [fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch/blob/master/dist/fast-json-patch.min.js) - 12kb
 - [json-8](https://github.com/sonnyp/JSON8/tree/master/packages/patch)
 - [jiff](https://github.com/cujojs/jiff)
+
+<img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 MIT
