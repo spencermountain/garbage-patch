@@ -77,7 +77,7 @@ and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have som
    -and before you think _'hey this guy has never seen that Rich Hickey talk'_ - I have seen that one.<br/>
    most javascript implementations call **.clone()** over and over.<br/>
 
-3. **- sneaky-append -** an **'add'** patch on an array doesn't need an index, and assumes a push on an array:
+3. **- sneaky-append -** an **_'add'_** patch on an array doesn't need an index, and assumes a push on an array:
 
 ```js
 let json = { foo: [1] }
@@ -87,7 +87,7 @@ json = apply(patch, json) //normally this would be an arror
 // {foo: [1, 2]}
 ```
 
-4. **- sneaky-splat -** an 'add' patch on an object doesn't need an key, if the value is also an object:
+4. **- sneaky-splat -** an **_'add'_** patch on an object doesn't need an key, if the value is also an object:
 
 ```js
 let json = { foo: { bar: true } }
@@ -110,8 +110,8 @@ apply(patch, json) //this would normally be an error, i think.
 
 - [json-patch](https://github.com/dharmafly/jsonpatch.js) - 7kb
 - [fast-json-patch](https://github.com/Starcounter-Jack/JSON-Patch/blob/master/dist/fast-json-patch.min.js) - 12kb
-- [json-8](https://github.com/sonnyp/JSON8/tree/master/packages/patch)
-- [jiff](https://github.com/cujojs/jiff)
+- [json-8](https://github.com/sonnyp/JSON8/tree/master/packages/patch) - 11kb
+- [jiff](https://github.com/cujojs/jiff) - 12kb
 
 <img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
