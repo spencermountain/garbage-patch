@@ -24,15 +24,17 @@
 </div>
 
 <!-- spacer -->
-<img height="85px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
+<img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
-[json patch](http://jsonpatch.com/) is a cool method for describing changes to a JSON object.
+[json patch](http://jsonpatch.com/) is an old and neat idea for describing changes to JSON.
 
-the idea is that it can clean up some muddled parts of a codebase, making the changes explicit.
+... the idea is that you can clean-up muddled parts of a codebase, by making your changes explicit.
+
+<img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 Does the world need another json-patch implementation? no.
 
-did I make one, and is it crappy? yes.
+did I make one, and is it crappy? **yes.**
 
 ```js
 const { get, make, apply } = require('./src')
@@ -58,15 +60,20 @@ apply(patch, json)
 
 there is nothing clever going on here.
 
+<!-- spacer -->
+<img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
+
+---
+
 these methods _takes inspiration_ from the [pointer spec](https://datatracker.ietf.org/doc/html/rfc6901)
 and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have some differences:
 
-1. _get()_ is more-forgiving
+1. **get()** is more-forgiving
    if you give it a path '/foo/typo/9/wrong' it will just say `undefined`!
-2. _apply()_ changes in-place (mutable)
+2. **apply()** changes in-place (mutable)
    -and before you think 'hey this guy has never seen that Rich Hickey talk' - I have.
    I just think calling .clone() over and over is not my style.
-3. _sneaky-append_ an 'add' patch on an array doesn't need an index, and assumes a push, when appropriate
+3. **sneaky-append** an 'add' patch on an array doesn't need an index, and assumes a push, when appropriate
 
 ```js
 let json = { foo: [1] }
@@ -76,7 +83,7 @@ json = apply(patch, json) //normally this would be an arror
 // {foo: [1, 2]}
 ```
 
-4. _sneaky-splat_ an 'add' patch on an object doesn't need an key, if the value is also an object
+4. **sneaky-splat** an 'add' patch on an object doesn't need an key, if the value is also an object
 
 ```js
 let json = { foo: { bar: true } }
@@ -85,11 +92,15 @@ apply(patch, json) //this would normally be an error, i think.
 // { foo: { bar: true, baz: true } }
 ```
 
+<img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
+
 ### API
 
 - **make** - create a JSON pointer from a list of properties
 - **get** - use a pointer to get data out of JSON
 - **apply** - make modifications to a JSON object (in place)
+
+<img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 ### See Also
 
