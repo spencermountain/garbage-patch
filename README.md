@@ -59,7 +59,7 @@ apply(patch, json)
 }*/
 ```
 
-there is nothing too-clever going on
+there is nothing too-clever going on. the min.js build is **_~2.5kb_**.
 
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
@@ -105,6 +105,13 @@ apply(patch, json) //this would normally be an error, i think.
 - **make(props)** - create a JSON pointer from a list of properties
 - **get(pntr,json)** - use a pointer to get data out of JSON
 - **apply(patch, json)** - make modifications to a JSON object (in place)
+
+all the different build formats are in `./builds` <br/>
+there's a **get** only build, that is < 1kb:
+
+```js
+import { get } from 'simple-json-patch'
+```
 
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
