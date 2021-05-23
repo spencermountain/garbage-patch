@@ -66,6 +66,15 @@ test('add ignore 2', function (t) {
   t.end()
 })
 
+test('add ignore 3', function (t) {
+  let json = { foo: ['bar'] }
+  let patch = [{ op: 'add', path: '/foo/-', value: ['abc', 'def'] }]
+  apply(patch, json)
+  let want = { foo: ['bar', ['abc', 'def']] }
+  t.deepEqual(json, want)
+  t.end()
+})
+
 test('sneaky append', function (t) {
   let json = { full: true, foo: [1] }
   let patch = { op: 'add', path: '/foo/', value: 2 }

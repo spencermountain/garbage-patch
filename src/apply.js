@@ -5,7 +5,7 @@ const actions = {
   remove: require('./actions/remove'),
   replace: require('./actions/replace'),
   move: require('./actions/move'),
-  copy: (patch, json) => {},
+  copy: require('./actions/copy'),
   test: require('./actions/test'),
 }
 

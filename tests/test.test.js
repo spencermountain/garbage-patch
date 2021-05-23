@@ -36,3 +36,15 @@ test('test-escape-order', function (t) {
   })
   t.end()
 })
+
+test('test-types', function (t) {
+  let json = {
+    '/': 9,
+    '~1': 10,
+  }
+  let patch = [{ op: 'test', path: '/~01', value: '10' }]
+  t.throws(() => {
+    apply(patch, json)
+  })
+  t.end()
+})
