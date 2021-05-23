@@ -1,16 +1,16 @@
 const getParent = require('../getParent')
 const { isArray, isNumber, isObject } = require('../_helper')
 
-const remove = (patch, json) => {
+const replace = (patch, json) => {
   let res = getParent(patch.path, json)
-  // object remove
+  // object replace
   if (isObject(res.parent)) {
-    delete res.parent[res.prop]
+    res.parent[res.prop] = patch.value
   }
-  // array remove
+  // array replace
   if (isArray(res.parent) && isNumber(res.prop)) {
-    res.parent.splice(res.prop, 1)
+    res.parent[res.prop] = patch.value
   }
 }
 
-module.exports = remove
+module.exports = replace

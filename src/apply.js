@@ -3,8 +3,8 @@ const { isArray } = require('./_helper')
 const actions = {
   add: require('./actions/add'),
   remove: require('./actions/remove'),
-  replace: (patch, json) => {},
-  move: (patch, json) => {},
+  replace: require('./actions/replace'),
+  move: require('./actions/move'),
   copy: (patch, json) => {},
   test: (patch, json) => {},
 }

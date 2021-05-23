@@ -17,11 +17,27 @@ const { get, make, apply, getParent } = require('./src')
 // let patch = { op: 'add' }
 // console.log(apply(patch, json))
 
-let json = { foo: ['bar', 'qux', 'baz'] }
+let json = {
+  foo: {
+    bar: 'baz',
+    waldo: true,
+  },
+  qux: {
+    corge: 'grault',
+  },
+}
 
-let patch = [{ op: 'remove', path: '/foo/1' }]
+let patch = [{ op: 'move', from: '/foo/waldo', path: '/qux/thud' }]
 
-let want = { foo: ['bar', 'baz'] }
+let want = {
+  foo: {
+    bar: 'baz',
+  },
+  qux: {
+    corge: 'grault',
+    thud: 'fred',
+  },
+}
 
 apply(patch, json)
 console.log(json)
