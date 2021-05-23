@@ -18,25 +18,15 @@ const { get, make, apply, getParent } = require('./src')
 // console.log(apply(patch, json))
 
 let json = {
-  foo: {
-    bar: 'baz',
-    waldo: true,
-  },
-  qux: {
-    corge: 'grault',
-  },
+  '/': 9,
+  '~1': 10,
 }
 
-let patch = [{ op: 'move', from: '/foo/waldo', path: '/qux/thud' }]
+let patch = [{ op: 'test', path: '/~01', value: 10 }]
 
 let want = {
-  foo: {
-    bar: 'baz',
-  },
-  qux: {
-    corge: 'grault',
-    thud: 'fred',
-  },
+  '/': 9,
+  '~1': 10,
 }
 
 apply(patch, json)

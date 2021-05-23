@@ -30,6 +30,42 @@ test('normal add object', function (t) {
   t.end()
 })
 
+test('normal add grandchild', function (t) {
+  let json = { foo: 'bar' }
+  let patch = [{ op: 'add', path: '/child', value: { grandchild: {} } }]
+  apply(patch, json)
+  let want = {
+    foo: 'bar',
+    child: {
+      grandchild: {},
+    },
+  }
+  t.deepEqual(json, want)
+  t.end()
+})
+
+test('normal add ignore', function (t) {
+  let json = { foo: 'bar' }
+  let patch = [{ op: 'add', path: '/baz', value: 'qux', xyz: 123 }]
+  apply(patch, json)
+  let want = {
+    foo: 'bar',
+    baz: 'qux',
+  }
+  t.deepEqual(json, want)
+  t.end()
+})
+
+// this throws in the spec
+test('add ignore 2', function (t) {
+  let json = { foo: 'bar' }
+  let patch = [{ op: 'add', path: '/baz/bat', value: 'qux' }]
+  apply(patch, json)
+  let want = { foo: 'bar' }
+  t.deepEqual(json, want)
+  t.end()
+})
+
 test('sneaky append', function (t) {
   let json = { full: true, foo: [1] }
   let patch = { op: 'add', path: '/foo/', value: 2 }

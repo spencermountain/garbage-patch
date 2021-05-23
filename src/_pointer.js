@@ -4,8 +4,8 @@ const isNum = /^[0-9]+$/
 // '~' is encoded as '~0'
 // '/' is encoded as '~1'
 const unescape = function (str) {
-  str = str.replace(/~0/g, '~')
   str = str.replace(/~1/g, '/')
+  str = str.replace(/~0/g, '~')
   return str
 }
 
