@@ -1,8 +1,10 @@
+<!-- spacer -->
+<img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
+
 <div align="center">
-  <div><b>simple-json-patch</b></div>
   <img src="https://user-images.githubusercontent.com/399657/68222691-6597f180-ffb9-11e9-8a32-a7f38aa8bded.png"/>
-  <div>json-pointer and json-patch implementation</div>
-  <div><code>npm install simple-json-patch</code></div>
+  <div>tiny json-pointer and json-patch implementation</div>
+  <div><code>npm install garbage-patch</code></div>
   <div align="center">
     <sub>
       by
@@ -14,52 +16,55 @@
 
 <div align="center">
   <div>
-    <a href="https://npmjs.org/package/simple-json-patch">
-     <img src="https://img.shields.io/npm/v/simple-json-patch.svg?style=flat-square" />
+    <a href="https://npmjs.org/package/garbage-patch">
+     <img src="https://img.shields.io/npm/v/garbage-patch.svg?style=flat-square" />
     </a>
-    <a href="https://bundlephobia.com/result?p=simple-json-patch">
-      <img src="https://badge-size.herokuapp.com/spencermountain/simple-json-patch/master/builds/simple-json-patch.min.js" />
+    <a href="https://bundlephobia.com/result?p=garbage-patch">
+      <img src="https://badge-size.herokuapp.com/spencermountain/garbage-patch/master/builds/garbage-patch.min.js" />
     </a>
   </div>
 </div>
-Work - in - Progress.
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
-**[json patch](http://jsonpatch.com/)** is a neat idea for describing changes to JSON.
+**[JSON Patch](http://jsonpatch.com/)** is a neat idea for describing changes to JSON -
 
-... the idea is that you can clean-up muddled parts of a codebase, by making data-changes explicit.
+... the idea is that you can clean-up muddled parts of a codebase, by making data-things explicit.
 
 it is pretty simple, and sort of beautiful.
+
 <img height="25px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
 Does the world need another json-patch implementation? no.
 
 did I make one, and is it crappy? **yes.**
 
-```js
-const { get, make, apply } = require('./src')
+<div align="center">garbage-patch</div>
 
-// make a json valid pointer
+```js
+const { get, make, apply } = require('garbage-patch')
+
+let json = {
+  foo: ['bar', 'baz'],
+}
+
+// apply clean changes to the json
+let patch = { op: 'add', path: '/foo/-', value: 'bob' }
+apply(patch, json)
+/* {
+  foo: ['bar', 'baz', 'bob'],
+} */
+
+// make a valid json pointer
 let ptr = make(['foo', 1])
 // '/foo/1'
 
 // use it to get some data
-let json = {
-  foo: ['bar', 'baz'],
-}
 let result = get(ptr, json)
 // 'baz'
-
-// apply clean changes to the json
-let patch = { op: 'add', path: '/foo/2', value: 'bar' }
-apply(patch, json)
-/*{
-  foo: ['bar', 'baz', 'bar'],
-}*/
 ```
 
-there is nothing too-clever going on. the min.js build is **_~2.5kb_**.
+there is nothing too-clever going on. the min.js build is **_2.5kb_**.
 
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
@@ -110,7 +115,11 @@ all the different build formats are in `./builds` <br/>
 there's a **get** only build, that is < 1kb:
 
 ```js
-import { get } from 'simple-json-patch'
+import { get } from 'garbage-patch'
+```
+
+```js
+const get = require('garbage-patch/get')
 ```
 
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>

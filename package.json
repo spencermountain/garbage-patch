@@ -1,20 +1,20 @@
 {
-  "name": "simple-json-patch",
+  "name": "garbage-patch",
   "description": "cute implementation of json-pointer and json-patch",
   "version": "0.0.1",
   "type": "commonjs",
   "sideEffects": false,
-  "main": "./builds/simple-json-patch.js",
-  "unpkg": "./builds/simple-json-patch.min.js",
-  "module": "./builds/simple-json-patch.mjs",
+  "main": "./builds/garbage-patch.js",
+  "unpkg": "./builds/garbage-patch.min.js",
+  "module": "./builds/garbage-patch.mjs",
   "exports": {
     ".": {
-      "require": "./builds/simple-json-patch.js",
-      "import": "./builds/simple-json-patch.mjs",
-      "default": "./builds/simple-json-patch.js"
+      "require": "./builds/garbage-patch.js",
+      "import": "./builds/garbage-patch.mjs",
+      "default": "./builds/garbage-patch.js"
     },
     "./get": {
-      "default": "./builds/json-pointer-get.js"
+      "default": "./builds/garbage-get.js"
     }
   },
   "scripts": {
@@ -23,10 +23,10 @@
     "test": "node ./tests/*.test.js | tap-dancer"
   },
   "author": "Spencer Kelly <spencermountain@gmail.com>",
-  "homepage": "https://github.com/spencermountain/simple-json-patch",
+  "homepage": "https://github.com/spencermountain/garbage-patch",
   "repository": {
     "type": "git",
-    "url": "git://github.com/spencermountain/simple-json-patch.git"
+    "url": "git://github.com/spencermountain/garbage-patch.git"
   },
   "prettier": {
     "trailingComma": "es5",

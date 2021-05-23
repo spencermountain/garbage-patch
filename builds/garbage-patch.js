@@ -1,4 +1,4 @@
-/* simple-json-patch 0.0.1 MIT */
+/* garbage-patch 0.0.1 MIT */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
@@ -280,7 +280,7 @@
     let value = get(patch.path, json);
 
     if (JSON.stringify(value) !== JSON.stringify(patch.value)) {
-      throw new Error(`simple-json-patch error: patch-test failed '${patch.path}'`);
+      throw new Error(`garbage-patch error: patch-test failed '${patch.path}'`);
     }
   };
 
