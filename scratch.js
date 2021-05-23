@@ -17,13 +17,11 @@ const { get, make, apply, getParent } = require('./src')
 // let patch = { op: 'add' }
 // console.log(apply(patch, json))
 
-let json = { foo: ['bar', 'baz'] }
+let json = { foo: ['bar', 'qux', 'baz'] }
 
-let patch = [{ op: 'add', path: '/foo/1', value: 'qux' }]
+let patch = [{ op: 'remove', path: '/foo/1' }]
 
-// { "foo": [ "bar", "qux", "baz" ] }
+let want = { foo: ['bar', 'baz'] }
 
-// let json = { foo: { bar: true } }
-// let patch = { op: 'add', path: '/foo/bar', value: 2 }
-apply(patch, json) //this would normally be an error, i think.
+apply(patch, json)
 console.log(json)
