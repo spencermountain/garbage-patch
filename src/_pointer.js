@@ -19,6 +19,10 @@ const parsePointer = function (pointr) {
       parts[i] = parseInt(parts[i], 10)
     }
   }
+  // allow trailing-slash
+  if (parts.length > 1 && parts[parts.length - 1] === '') {
+    parts.pop()
+  }
   return parts
 }
 module.exports = parsePointer

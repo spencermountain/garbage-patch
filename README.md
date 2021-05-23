@@ -22,7 +22,7 @@
     </a>
   </div>
 </div>
-
+Work - in - Progress.
 <!-- spacer -->
 <img height="45px" src="https://user-images.githubusercontent.com/399657/68221862-17ceb980-ffb8-11e9-87d4-7b30b6488f16.png"/>
 
@@ -72,6 +72,8 @@ and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have som
 1. **get()** is more-forgiving<br/>
    if you give it a path '/foo/typo/9/wrong' that doesn't exist,<br/>
    it will just say - '_haha! no problem! **undefined**! ✌_'
+
+   also, a trailing slash is allowed - `/foo/`
 
 2. **apply()** changes in-place (mutable)<br/>
    -and before you think _'hey this guy has never seen that Rich Hickey talk'_ - I have seen that one.<br/>

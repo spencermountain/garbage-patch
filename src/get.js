@@ -5,7 +5,11 @@ const get = function (pointr, data) {
   if (!pointr) {
     return data
   }
-  let parts = parsePointer(pointr)
+  let parts = pointr
+  if (typeof pointr === 'string') {
+    parts = parsePointer(pointr)
+  }
+
   // gotta start with a slash
   if (parts[0] !== '') {
     return undefined
@@ -18,8 +22,10 @@ const get = function (pointr, data) {
       node = node[node.length - 1]
     } else if (typeof el === 'number') {
       node = node[el]
-    } else if (data.hasOwnProperty(el)) {
+    } else if (node.hasOwnProperty(el)) {
       node = node[el]
+    } else {
+      return undefined
     }
   }
   return node

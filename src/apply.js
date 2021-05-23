@@ -1,5 +1,5 @@
 const get = require('./get')
-const getAlmost = require('./_get-almost')
+const getParent = require('./getParent')
 const { isArray, isNumber, isObject } = require('./_helper')
 
 const actions = {
@@ -15,7 +15,15 @@ const actions = {
       Object.assign(node, patch.value)
       return
     }
-    console.log(node)
+    // traditional array-add
+    let res = getParent(patch.path, json)
+    if (isArray(res.parent)) {
+      if (res.prop === '-') {
+        res.parent.push(patch.value) //simple push
+      } else if (isNumber(res.prop)) {
+        res.parent.splice(res.prop, 0, patch.value) // splice into index
+      }
+    }
   },
   remove: (patch, json) => {},
   replace: (patch, json) => {},

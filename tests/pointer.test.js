@@ -39,3 +39,22 @@ test('get', function (t) {
   })
   t.end()
 })
+
+test('misc', function (t) {
+  let json = {
+    nice: true,
+    foo: ['bar', 'baz'],
+    cool: {
+      yes: {
+        oh: 'yeah',
+      },
+    },
+  }
+  t.equal(get('/nice', json), true, 'no-trailing-slash')
+  t.equal(get('/nice/', json), true, 'trailing-slash-one')
+
+  t.equal(get('/cool/yes/oh', json), 'yea', 'three-step')
+  t.equal(get('/cool/yes/oh/', json), 'yea', 'trailing-slash-deep')
+  t.equal(get('/cool/wrong/yes/oh', json), undefined, 'no-skip-step')
+  t.end()
+})

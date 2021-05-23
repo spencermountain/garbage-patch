@@ -17,7 +17,7 @@
   "scripts": {
     "build": "rollup -c --silent",
     "watch": "amble ./scratch.js",
-    "test": "node \"./tests/**.test.js\" | tap-dancer"
+    "test": "node ./tests/*.test.js | tap-dancer"
   },
   "author": "Spencer Kelly <spencermountain@gmail.com>",
   "homepage": "https://github.com/spencermountain/simple-json-patch",
