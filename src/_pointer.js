@@ -25,4 +25,4 @@ const parsePointer = function (pointr) {
   }
   return parts
 }
-module.exports = parsePointer
+export default parsePointer

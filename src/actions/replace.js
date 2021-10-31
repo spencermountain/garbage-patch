@@ -1,5 +1,5 @@
-const getParent = require('../getParent')
-const { isArray, isNumber, isObject } = require('../_helper')
+import getParent from '../getParent.js'
+import { isArray, isNumber, isObject } from '../_helper.js'
 
 const replace = (patch, json) => {
   let res = getParent(patch.path, json)
@@ -13,4 +13,4 @@ const replace = (patch, json) => {
   }
 }
 
-module.exports = replace
+export default replace

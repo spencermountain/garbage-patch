@@ -16,4 +16,4 @@ const make = function (props) {
   })
   return '/' + props.join('/')
 }
-module.exports = make
+export default make

@@ -1,5 +1,5 @@
-const test = require('tape')
-const { getParent, get } = require('../src')
+import test from 'tape'
+import { getParent, get } from '../src/index.js'
 
 test('getParent', function (t) {
   let json = {

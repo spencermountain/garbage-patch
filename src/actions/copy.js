@@ -1,5 +1,5 @@
-const get = require('../get')
-const add = require('./add')
+import get from '../get.js'
+import add from './add.js'
 
 const copy = (patch, json) => {
   let value = get(patch.from, json)
@@ -7,4 +7,4 @@ const copy = (patch, json) => {
   add(addPatch, json)
 }
 
-module.exports = copy
+export default copy

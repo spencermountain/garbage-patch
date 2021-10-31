@@ -1,5 +1,5 @@
-const test = require('tape')
-const { get } = require('../src')
+import test from 'tape'
+import { get } from '../src/index.js'
 
 let obj = {
   foo: ['bar', 'baz'],

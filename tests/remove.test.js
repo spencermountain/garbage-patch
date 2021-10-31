@@ -1,5 +1,5 @@
-const test = require('tape')
-const { apply } = require('../src')
+import test from 'tape'
+import { apply } from '../src/index.js'
 
 test('remove object', function (t) {
   let json = {

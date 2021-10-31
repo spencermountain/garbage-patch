@@ -1,4 +1,4 @@
-const parsePointer = require('./_pointer')
+import parsePointer from './_pointer.js'
 
 const get = function (pointr, data) {
   // empty pointer is everything.
@@ -31,4 +31,4 @@ const get = function (pointr, data) {
   return node
 }
 
-module.exports = get
+export default get

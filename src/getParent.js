@@ -1,6 +1,6 @@
-const parsePointer = require('./_pointer')
-const get = require('./get')
-const { isArray, isObject } = require('./_helper')
+import parsePointer from './_pointer.js'
+import get from './get.js'
+import { isArray, isObject } from './_helper.js'
 
 const getParent = function (pointr, json) {
   let prop = ''
@@ -15,7 +15,7 @@ const getParent = function (pointr, json) {
   }
   return { parent: parent, prop: prop }
 }
-module.exports = getParent
+export default getParent
 
 // let json = {
 //   foo: ['bar', 'baz'],

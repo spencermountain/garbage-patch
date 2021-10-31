@@ -1,6 +1,6 @@
-const get = require('../get')
-const getParent = require('../getParent')
-const { isArray, isNumber, isObject, isString } = require('../_helper')
+import get from '../get.js'
+import getParent from '../getParent.js'
+import { isArray, isNumber, isObject, isString } from '../_helper.js'
 
 const add = (patch, json) => {
   let node = get(patch.path, json)
@@ -29,4 +29,4 @@ const add = (patch, json) => {
   }
 }
 
-module.exports = add
+export default add

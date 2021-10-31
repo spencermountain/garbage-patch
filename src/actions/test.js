@@ -1,4 +1,4 @@
-const get = require('../get')
+import get from '../get.js'
 
 const test = (patch, json) => {
   let value = get(patch.path, json)
@@ -7,4 +7,4 @@ const test = (patch, json) => {
   }
 }
 
-module.exports = test
+export default test

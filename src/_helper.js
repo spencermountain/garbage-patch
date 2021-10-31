@@ -1,19 +1,21 @@
-exports.isArray = arr => {
+const isArray = function (arr) {
   return Object.prototype.toString.call(arr) === '[object Array]'
 }
 
-exports.isBoolean = val => {
+const isBoolean = function (val) {
   return typeof val === 'boolean'
 }
 
-exports.isNumber = val => {
+const isNumber = function (val) {
   return typeof val === 'number' && isFinite(val)
 }
 
-exports.isString = val => {
+const isString = function (val) {
   return typeof val === 'string'
 }
 
-exports.isObject = val => {
+const isObject = function (val) {
   return Object.prototype.toString.call(val) === '[object Object]'
 }
+
+export { isArray, isBoolean, isNumber, isString, isObject }

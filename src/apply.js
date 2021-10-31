@@ -1,12 +1,18 @@
-const { isArray } = require('./_helper')
+import { isArray } from './_helper.js'
+import add from './actions/add.js'
+import remove from './actions/remove.js'
+import replace from './actions/replace.js'
+import move from './actions/move.js'
+import copy from './actions/copy.js'
+import test from './actions/test.js'
 
 const actions = {
-  add: require('./actions/add'),
-  remove: require('./actions/remove'),
-  replace: require('./actions/replace'),
-  move: require('./actions/move'),
-  copy: require('./actions/copy'),
-  test: require('./actions/test'),
+  add,
+  remove,
+  replace,
+  move,
+  copy,
+  test,
 }
 
 const apply = function (patches, json) {
@@ -21,4 +27,4 @@ const apply = function (patches, json) {
   })
   return json
 }
-module.exports = apply
+export default apply

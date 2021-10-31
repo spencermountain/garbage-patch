@@ -1,6 +1,6 @@
-const get = require('../get')
-const remove = require('./remove')
-const add = require('./add')
+import get from '../get.js'
+import remove from './remove.js'
+import add from './add.js'
 
 const move = (patch, json) => {
   let value = get(patch.from, json)
@@ -12,4 +12,4 @@ const move = (patch, json) => {
   add(addPatch, json)
 }
 
-module.exports = move
+export default move

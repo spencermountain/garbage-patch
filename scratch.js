@@ -1,4 +1,4 @@
-const { get, make, apply, getParent } = require('./src')
+import { get, make, apply, getParent } from './src/index.js'
 
 // let json = {
 //   foo: ['bar', 'baz'],
