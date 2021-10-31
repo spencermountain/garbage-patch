@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "sideEffects": false,
-  "main": "./builds/garbage-patch.js",
+  "main": "./builds/garbage-patch.mjs",
   "unpkg": "./builds/garbage-patch.min.js",
   "module": "./builds/garbage-patch.mjs",
   "exports": {

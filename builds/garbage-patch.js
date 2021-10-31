@@ -1,9 +1,9 @@
-/* garbage-patch 0.0.1 MIT */
+/* garbage-patch 0.1.0 MIT */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.simpleJsonPatch = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.simpleJsonPatch = {}));
+})(this, (function (exports) { 'use strict';
 
   const isNum = /^[0-9]+$/; // https://datatracker.ietf.org/doc/html/rfc6901
   // '~' is encoded as '~0'
@@ -16,7 +16,7 @@
   }; // turn a pointer string into an array
 
 
-  const parsePointer$2 = function (pointr) {
+  const parsePointer = function (pointr) {
     let parts = pointr.split('/'); // walk through parts of the pointer
 
     for (let i = 1; i < parts.length; i += 1) {
@@ -35,11 +35,25 @@
     return parts;
   };
 
-  var _pointer = parsePointer$2;
+  var parsePointer$1 = parsePointer;
 
-  const parsePointer$1 = _pointer;
+  const isArray = function (arr) {
+    return Object.prototype.toString.call(arr) === '[object Array]';
+  };
 
-  const get$5 = function (pointr, data) {
+  const isNumber = function (val) {
+    return typeof val === 'number' && isFinite(val);
+  };
+
+  const isString = function (val) {
+    return typeof val === 'string';
+  };
+
+  const isObject = function (val) {
+    return Object.prototype.toString.call(val) === '[object Object]';
+  };
+
+  const get = function (pointr, data) {
     // empty pointer is everything.
     if (!pointr) {
       return data;
@@ -49,16 +63,16 @@
 
     if (typeof pointr === 'string') {
       parts = parsePointer$1(pointr);
-    } // gotta start with a slash
+    } // support leading slash
 
 
-    if (parts[0] !== '') {
-      return undefined;
+    if (parts[0] === '') {
+      parts.shift(); //   return undefined
     }
 
     let node = data; // walk through parts of the pointer
 
-    for (let i = 1; i < parts.length; i += 1) {
+    for (let i = 0; i < parts.length; i += 1) {
       let el = parts[i];
 
       if (el === '-') {
@@ -75,11 +89,11 @@
     return node;
   };
 
-  var get_1 = get$5;
+  var get$1 = get;
 
+  // https://datatracker.ietf.org/doc/html/rfc6901
   // '~' is encoded as '~0'
   // '/' is encoded as '~1'
-
   const escape = function (str) {
     str = str.replace(/~[^01]/g, '~0');
     str = str.replace(/\//g, '~1');
@@ -98,48 +112,19 @@
     return '/' + props.join('/');
   };
 
-  var make_1 = make;
+  var make$1 = make;
 
-  var _helper = {};
-
-  _helper.isArray = arr => {
-    return Object.prototype.toString.call(arr) === '[object Array]';
-  };
-
-  _helper.isBoolean = val => {
-    return typeof val === 'boolean';
-  };
-
-  _helper.isNumber = val => {
-    return typeof val === 'number' && isFinite(val);
-  };
-
-  _helper.isString = val => {
-    return typeof val === 'string';
-  };
-
-  _helper.isObject = val => {
-    return Object.prototype.toString.call(val) === '[object Object]';
-  };
-
-  const parsePointer = _pointer;
-  const get$4 = get_1;
-  const {
-    isArray: isArray$4,
-    isObject: isObject$3
-  } = _helper;
-
-  const getParent$3 = function (pointr, json) {
+  const getParent = function (pointr, json) {
     let prop = '';
-    let parts = parsePointer(pointr);
+    let parts = parsePointer$1(pointr);
 
     if (parts.length > 1) {
       prop = parts.pop();
     }
 
-    let parent = get$4(parts, json); // a parent must be an object or an array
+    let parent = get$1(parts, json); // a parent must be an object or an array
 
-    if (!isArray$4(parent) && !isObject$3(parent)) {
+    if (!isArray(parent) && !isObject(parent)) {
       parent = undefined;
     }
 
@@ -149,106 +134,87 @@
     };
   };
 
-  var getParent_1 = getParent$3; // let json = {
+  var getParent$1 = getParent; // let json = {
+  //   foo: ['bar', 'baz'],
+  //   cool: {
+  //     yes: {
+  //       oh: 'yeah',
+  //     },
+  //   },
+  // }
+  // console.log(getParent('/cool/yes/', json))
 
-  const get$3 = get_1;
-  const getParent$2 = getParent_1;
-  const {
-    isArray: isArray$3,
-    isNumber: isNumber$2,
-    isObject: isObject$2,
-    isString
-  } = _helper;
+  const add = (patch, json) => {
+    let node = get$1(patch.path, json); // sneaky-push
 
-  const add$2 = (patch, json) => {
-    let node = get$3(patch.path, json); // sneaky-push
-
-    if (isArray$3(node) === true) {
+    if (isArray(node) === true) {
       node.push(patch.value);
       return;
     } // sneaky-splat
 
 
-    if (isObject$2(node) === true && isObject$2(patch.value) === true) {
+    if (isObject(node) === true && isObject(patch.value) === true) {
       Object.assign(node, patch.value);
       return;
     } // traditional array-add
 
 
-    let res = getParent$2(patch.path, json);
+    let res = getParent$1(patch.path, json);
 
-    if (isArray$3(res.parent)) {
+    if (isArray(res.parent)) {
       if (res.prop === '-') {
         res.parent.push(patch.value); //simple push
-      } else if (isNumber$2(res.prop)) {
+      } else if (isNumber(res.prop)) {
         res.parent.splice(res.prop, 0, patch.value); // splice into index
       }
     } // traditional object-add
 
 
-    if (isObject$2(res.parent) && isString(res.prop)) {
+    if (isObject(res.parent) && isString(res.prop)) {
       res.parent[res.prop] = patch.value; // add it to object
     }
   };
 
-  var add_1 = add$2;
+  var add$1 = add;
 
-  const getParent$1 = getParent_1;
-  const {
-    isArray: isArray$2,
-    isNumber: isNumber$1,
-    isObject: isObject$1
-  } = _helper;
-
-  const remove$1 = (patch, json) => {
+  const remove = (patch, json) => {
     let res = getParent$1(patch.path, json); // object remove
 
-    if (isObject$1(res.parent)) {
+    if (isObject(res.parent)) {
       delete res.parent[res.prop];
     } // array remove
 
 
-    if (isArray$2(res.parent) && isNumber$1(res.prop)) {
+    if (isArray(res.parent) && isNumber(res.prop)) {
       res.parent.splice(res.prop, 1);
     }
   };
 
-  var remove_1 = remove$1;
-
-  const getParent = getParent_1;
-  const {
-    isArray: isArray$1,
-    isNumber,
-    isObject
-  } = _helper;
+  var remove$1 = remove;
 
   const replace = (patch, json) => {
-    let res = getParent(patch.path, json); // object replace
+    let res = getParent$1(patch.path, json); // object replace
 
     if (isObject(res.parent)) {
       res.parent[res.prop] = patch.value;
     } // array replace
 
 
-    if (isArray$1(res.parent) && isNumber(res.prop)) {
+    if (isArray(res.parent) && isNumber(res.prop)) {
       res.parent[res.prop] = patch.value;
     }
   };
 
-  var replace_1 = replace;
-
-  const get$2 = get_1;
-  const remove = remove_1;
-  const add$1 = add_1;
+  var replace$1 = replace;
 
   const move = (patch, json) => {
-    let value = get$2(patch.from, json); //  remove it
+    let value = get$1(patch.from, json); //  remove it
 
     let removePatch = {
       op: 'remove',
       path: patch.from
     };
-    remove(removePatch, json);
+    remove$1(removePatch, json);
     let addPatch = {
       op: 'add',
       path: patch.path,
@@ -257,10 +223,7 @@
     add$1(addPatch, json);
   };
 
-  var move_1 = move;
-
-  const get$1 = get_1;
-  const add = add_1;
+  var move$1 = move;
 
   const copy = (patch, json) => {
     let value = get$1(patch.from, json);
@@ -269,33 +232,28 @@
       path: patch.path,
       value: value
     };
-    add(addPatch, json);
+    add$1(addPatch, json);
   };
 
-  var copy_1 = copy;
-
-  const get = get_1;
+  var copy$1 = copy;
 
   const test = (patch, json) => {
-    let value = get(patch.path, json);
+    let value = get$1(patch.path, json);
 
     if (JSON.stringify(value) !== JSON.stringify(patch.value)) {
-      throw new Error(`garbage-patch error: patch-test failed '${patch.path}'`);
+      throw new Error("garbage-patch error: patch-test failed '".concat(patch.path, "'"));
     }
   };
 
-  var test_1 = test;
+  var test$1 = test;
 
-  const {
-    isArray
-  } = _helper;
   const actions = {
-    add: add_1,
-    remove: remove_1,
-    replace: replace_1,
-    move: move_1,
-    copy: copy_1,
-    test: test_1
+    add: add$1,
+    remove: remove$1,
+    replace: replace$1,
+    move: move$1,
+    copy: copy$1,
+    test: test$1
   };
 
   const apply = function (patches, json) {
@@ -313,15 +271,13 @@
     return json;
   };
 
-  var apply_1 = apply;
+  var apply$1 = apply;
 
-  var src = {
-    get: get_1,
-    make: make_1,
-    apply: apply_1,
-    getParent: getParent_1
-  };
+  exports.apply = apply$1;
+  exports.get = get$1;
+  exports.getParent = getParent$1;
+  exports.make = make$1;
 
-  return src;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
-})));
+}));
