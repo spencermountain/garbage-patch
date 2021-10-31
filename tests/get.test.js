@@ -35,5 +35,9 @@ test('get', function (t) {
   fromArr = get([3], json)
   t.deepEqual(fromPtr, fromArr)
 
+  // get everything
+  fromArr = get([], json)
+  t.deepEqual(fromArr, json)
+
   t.end()
 })

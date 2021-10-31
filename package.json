@@ -1,10 +1,10 @@
 {
   "name": "garbage-patch",
   "description": "cute implementation of json-pointer and json-patch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "sideEffects": false,
-  "main": "./builds/garbage-patch.mjs",
+  "main": "./src/index.js",
   "unpkg": "./builds/garbage-patch.min.js",
   "module": "./builds/garbage-patch.mjs",
   "exports": {

@@ -17,5 +17,6 @@ let json = {
 // let patch = { op: 'add' }
 // console.log(apply(patch, json))
 
-console.log(get('/foo/1', json))
-console.log(get(['foo', 1], json))
+// console.log(get('/foo/1', json))
+// console.log(get(['foo', 1], json))
+console.log(get([], json))
