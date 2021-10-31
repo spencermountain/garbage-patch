@@ -42,7 +42,7 @@ did I make one, and is it crappy? **yes.**
 <div align="center">garbage-patch</div>
 
 ```js
-const { get, make, apply } = require('garbage-patch')
+import { get, make, apply } = from 'garbage-patch'
 
 let json = {
   foo: ['bar', 'baz'],
@@ -79,6 +79,16 @@ and the [patch-spec](https://datatracker.ietf.org/doc/html/rfc6902) but have som
    it will just say - '_haha! no problem! **undefined**! ✌_'
 
    also, a trailing slash is allowed - `/foo/`
+
+   also, a leading slash is optional - `foo/1`
+
+   if you prefer, you can use an array as a pointer, too:
+
+```js
+let json = { foo: [null, 'found'] }
+let found = get(['foo', 1], json) 
+// 'found'
+```
 
 2. **apply()** changes in-place (mutable)<br/>
    -and before you think _'hey this guy has never seen that Rich Hickey talk'_ - I have seen that one.<br/>

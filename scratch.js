@@ -1,9 +1,9 @@
 import { get, make, apply, getParent } from './src/index.js'
 
-// let json = {
-//   foo: ['bar', 'baz'],
-//   cool: true,
-// }
+let json = {
+  foo: ['bar', 'baz'],
+  cool: true,
+}
 
 // console.log(getParent('/cool/asdf', json))
 
@@ -17,9 +17,5 @@ import { get, make, apply, getParent } from './src/index.js'
 // let patch = { op: 'add' }
 // console.log(apply(patch, json))
 
-let json = { foo: ['bar'] }
-
-let patch = { op: 'copy', from: '/foo', path: '/a' }
-let want = { foo: ['bar'], a: ['bar'] }
-apply(patch, json)
-console.log(json)
+console.log(get('/foo/1', json))
+console.log(get(['foo', 1], json))

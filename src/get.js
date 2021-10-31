@@ -1,4 +1,5 @@
 import parsePointer from './_pointer.js'
+import { isArray } from './_helper.js'
 
 const get = function (pointr, data) {
   // empty pointer is everything.
@@ -10,13 +11,14 @@ const get = function (pointr, data) {
     parts = parsePointer(pointr)
   }
 
-  // gotta start with a slash
-  if (parts[0] !== '') {
-    return undefined
+  // support leading slash
+  if (parts[0] === '') {
+    parts.shift()
+    //   return undefined
   }
   let node = data
   // walk through parts of the pointer
-  for (let i = 1; i < parts.length; i += 1) {
+  for (let i = 0; i < parts.length; i += 1) {
     let el = parts[i]
     if (el === '-') {
       node = node[node.length - 1]
